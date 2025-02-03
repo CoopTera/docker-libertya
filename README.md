@@ -14,21 +14,21 @@ bajar desde aquí:
 
 https://www.oracle.com/technetwork/java/javase/downloads/java-archive-javase8-2177648.html
 
-Hay que bajar el archivo `jdk-8u171-linux-x64.tar.gz` y ponerlo en la carpeta `libertya/`. Si se desea cambiar de versión hay que modificar el Dockerfile con las rutas.
+Hay que bajar el archivo `jdk-8u202-linux-x64.tar.gz` y ponerlo en la carpeta `libertya/`. Si se desea cambiar de versión hay que modificar el Dockerfile con las rutas.
 
 # Crear las imagenes y los containers.
 
 Desde la carpeta del proyecto
 
-`$ docker-compose up -d`
+`$ docker compose up -d`
 
 # Accediendo y parando
 
 Si todo salió bien tiene que libertya debería ser accesible desde `localhost:8080`. Para parar los containers se usa:
 
-`$ docker-compose stop`
+`$ docker compose stop`
 
-Revisar la documentaciòn de `docker-compose` para mas opciones.
+Revisar la documentaciòn de `docker compose` para mas opciones.
 
 # ADVERTENCIA
 
@@ -36,5 +36,4 @@ NO usar en producciòn están los passwords hardcodeados!
 
 # Windows
 
-Esta configuración no está probado en windows. Podría funcionar capaz falle
-algún permiso.
+Esta configuración no está probado en Windows.
