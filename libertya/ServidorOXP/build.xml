@@ -45,6 +45,10 @@
 
 	<echo message="Windows=${isWindows} JBoss=${isAppsJBoss}"/>
 
+  	<!-- Necesario para incluirlo posteriormente en OXPRoot.war  -->
+    <copy file="utils/Libertya.sh"
+       tofile="lib/Libertya.sh" filtering="yes" overwrite="yes"/>
+
   </target>
 
   <!-- ==================================================== -->
@@ -152,6 +156,10 @@
   	<unjar src="lib/fluent-hc-4.5.2.jar" dest="construirOXPLIB" />
   	<unjar src="lib/commons-logging-1.2.jar" dest="construirOXPLIB" />
   	<unjar src="lib/commons-codec-1.9.jar" dest="construirOXPLIB" />
+  	<unjar src="lib/lyws.jar" dest="construirOXPLIB" />
+  	<unjar src="lib/fonts.jar" dest="construirOXPLIB" />
+  	<unjar src="lib/core-3.3.1.jar" dest="construirOXPLIB" />
+  	<unjar src="lib/javase-3.3.1.jar" dest="construirOXPLIB" />
 
     <!--fin cambios para PostgreSQL -->    
     <unjar src="lib/${TIPO_APPS_OXP}.jar" dest="construirOXPLIB" />
@@ -185,6 +193,11 @@
     <unjar src="lib/OXP.jar" dest="nuevoOXP" />
   	<unjar src="lib/OXPRoot.jar" dest="nuevoOXPRoot" />
   	<unjar src="lib/webui.war" dest="nuevoWEBUI" />
+  	<!-- Librerias de OXPXLib adicionales, relacionadas con la funcionalidad de QRCode para webui -->
+  	<copy file="lib/gson-2.8.0.jar" todir="nuevoWEBUI/WEB-INF/lib"  />
+  	<copy file="lib/core-3.3.1.jar" todir="nuevoWEBUI/WEB-INF/lib"  />
+  	<copy file="lib/javase-3.3.1.jar" todir="nuevoWEBUI/WEB-INF/lib"  />
+  	<copy file="lib/commons-codec-1.9.jar" todir="nuevoWEBUI/WEB-INF/lib"  />
   	
 	<!-- Descomprimir todos los plugins -->	
 	<unzip dest="nuevosComponents">
@@ -484,7 +497,7 @@
 		 		includes="ClienteLBY.zip,OXP.jar,OXPXLib.jar,*.jnlp,*.0,*.html"
 				prefix="OXPHome"/-->
 			<zipfileset dir="${basedir}/lib" 
-				includes="ClienteLBY.zip,OXP.jar,OXPXLib.jar,*.jnlp,*.0,*.html,JasperReports.jar"
+				includes="ClienteLBY.zip,OXP.jar,OXPXLib.jar,*.jnlp,*.0,*.html,JasperReports.jar,Libertya.sh,libertya.exe"
 				prefix="OXPHome"/>
 	</zip>
 
@@ -498,10 +511,10 @@
 		includes="OXPRoot.jar,OXPRoot.war,OXP.jar,OXPSLib.jar"/>
 	  <manifest>
 		<attribute name="Specification-Title" value="Libertya"/>
-		<attribute name="Specification-Version" value="V19.07"/>
-		<attribute name="Specification-Vendor" value="(C) 2019 DISYTEL."/>
+		<attribute name="Specification-Version" value="V22.0"/>
+		<attribute name="Specification-Vendor" value="(C) 2022 DISYTEL."/>
 		<attribute name="Implementation-Title" value="libertya"/>
-		<attribute name="Implementation-Version" value="V2 ${DSTAMP}-${TSTAMP}"/>
+		<attribute name="Implementation-Version" value="V22.0 ${DSTAMP}-${TSTAMP}"/>
 		<attribute name="Implementation-URL" value="http://www.libertya.org"/>
 		<!--attribute name="Class-Path" value="OXPRoot.jar OXP.jar OXPSLib.jar"/-->
 	  	<attribute name="Class-Path" value="OXPRoot.jar OXP.jar OXPSLib.jar"/>
@@ -518,10 +531,10 @@
 		 includes="OXPApps.war,OXP.jar,OXPSLib.jar"/>
 	  <manifest>
 		<attribute name="Specification-Title" value="ServidorAplicacionesLibertya"/>
-		<attribute name="Specification-Version" value="V2"/>
-		<attribute name="Specification-Vendor" value="(C) 2005-2007 FUNDESLE."/>
+		<attribute name="Specification-Version" value="V22.0"/>
+		<attribute name="Specification-Vendor" value="(C) 2022 DISYTEL."/>
 		<attribute name="Implementation-Title" value="ServidorAplicacionesLibertya"/>
-		<attribute name="Implementation-Version" value="V2 ${DSTAMP}-${TSTAMP}"/>
+		<attribute name="Implementation-Version" value="V22.0 ${DSTAMP}-${TSTAMP}"/>
 		<attribute name="Implementation-URL" value="http://www.libertya.org"/>
 	  	<!--attribute name="Class-Path" value="OXP.jar OXPSLib.jar"/-->
 	  	<attribute name="Class-Path" value="OXP.jar OXPSLib.jar"/>
@@ -538,10 +551,10 @@
 		includes="TiendaWebOXP.war,OXP.jar,OXPSLib.jar,OXPApps.jar"/>
 	  <manifest>
 		<attribute name="Specification-Title" value="TiendaWebLibertya"/>
-		<attribute name="Specification-Version" value="v2"/>
-		<attribute name="Specification-Vendor" value="(C) 2019 DISYTEL."/>
+		<attribute name="Specification-Version" value="V22.0"/>
+		<attribute name="Specification-Vendor" value="(C) 2022 DISYTEL."/>
 		<attribute name="Implementation-Title" value="TiendaWebLibertya"/>
-		<attribute name="Implementation-Version" value="V2 ${DSTAMP}-${TSTAMP}"/>
+		<attribute name="Implementation-Version" value="V22.0 ${DSTAMP}-${TSTAMP}"/>
 		<attribute name="Implementation-URL" value="http://www.libertya.org"/>
 	  	<!--attribute name="Class-Path" value="OXP.jar OXPSLib.jar OXPApps.jar"/-->
 	  	<attribute name="Class-Path" value="OXP.jar OXPSLib.jar OXPApps.jar"/>
@@ -564,9 +577,9 @@
 	    tofile="${basedir}/jboss/server/openXpertya/conf/login-config.xml" filtering="yes" overwrite="yes"/-->
 	
 	<!-- Filter JBoss Templates HTTP Invoker	-->
-	<copy file="${basedir}/jboss/server/openXpertya/deploy/http-invoker.sar/META-INF/jboss-serviceTemplate.xml"
+<!--	<copy file="${basedir}/jboss/server/openXpertya/deploy/http-invoker.sar/META-INF/jboss-serviceTemplate.xml"
 	    tofile="${basedir}/jboss/server/openXpertya/deploy/http-invoker.sar/META-INF/jboss-service.xml" filtering="yes" overwrite="yes"/>
-	 	
+-->	 	
 	<!-- cambios necesarios para  java1.5-->
 	<!-- Cambios para Tomcat 5.5		-->
 	<!--copy file="${basedir}/jboss/server/openXpertya/deploy/jbossweb-tomcat41.sar/META-INF/jboss-serviceTemplate.xml"
@@ -583,6 +596,11 @@
     <delete file="${basedir}/jboss/server/openXpertya/lib/CServer.jar" failonerror="no"/>
     <delete file="${basedir}/jboss/server/openXpertya/lib/oracle.jar" failonerror="no"/>
 
+  	<!-- Eliminar apps innecesarias -->
+  	<delete dir="${basedir}/jboss/server/openXpertya/deploy/http-invoker.sar" failonerror="no"/>
+	<delete dir="${basedir}/jboss/server/openXpertya/deploy/jmx-console.war" failonerror="no"/>
+  	<delete dir="${basedir}/jboss/server/openXpertya/deploy/management" failonerror="no"/>
+  	
   </target>
 
 	

@@ -1,6 +1,6 @@
-FROM debian:stretch
+FROM debian:buster
 
-ADD jdk-8u171-linux-x64.tar.gz /opt
+ADD jdk-8u202-linux-x64.tar.gz /opt
 
 RUN useradd -ms /bin/bash libertya
 
@@ -12,7 +12,7 @@ RUN chown libertya:libertya /var/run/libertya
 USER libertya
 
 ENV OXP_HOME=/ServidorOXP
-ENV JAVA_HOME=/opt/jdk1.8.0_171
+ENV JAVA_HOME=/opt/jdk1.8.0_202
 ENV PATH="${PATH}:${JAVA_HOME}/bin"
 
 WORKDIR /ServidorOXP

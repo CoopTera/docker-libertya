@@ -2,11 +2,11 @@
 #export JAVA=${JAVA_HOME}/bin/java
 if [ "$JAVA_HOME" = "" ]; then
 export JAVA=java
-echo JAVA_HOME no est� asignado.
+echo JAVA_HOME no est� asignado.  
 echo Es posible que la configuraci�n no pueda realizarse correctamente!!
 echo Se debe asignar JAVA_HOME al directorio en donde se encuentra el JDK 1.6.
 else
-export JAVA=${JAVA_HOME}/bin/java
+export JAVA=${JAVA_HOME}/bin/java	
 fi
 
 echo =======================================
@@ -21,3 +21,4 @@ export ARGS=CONFIG
 
 
 $JAVA -classpath $CP -DOXP_HOME=$OXP_HOME -Djava.awt.headless=true org.openXpertya.install.SilentSetup $ARGS
+
