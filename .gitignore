@@ -1,2 +1,3 @@
-libertya/OpenJDK8U-*
+libertya/jdk-*
+postgres/dump_*
 .env

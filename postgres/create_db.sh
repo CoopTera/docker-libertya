@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-POSTGRES="psql --username ${POSTGRES_USER}"
+POSTGRES="psql -U ${POSTGRES_USER}"
 
 echo "Creating database: ${DB_NAME}"
 
